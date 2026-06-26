@@ -27,7 +27,7 @@ router.post('/ticket-prices', async (req, res, next) => {
 // Update ticket price
 router.put('/ticket-prices/:id', async (req, res, next) => {
   try {
-    const price = await TicketPrice.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const price = await TicketPrice.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' })
     if (!price) return res.status(404).json({ error: 'Ticket price not found' })
     res.json(price)
   } catch (error) {

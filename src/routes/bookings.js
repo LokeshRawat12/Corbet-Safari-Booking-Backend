@@ -189,7 +189,7 @@ router.patch('/bookings/:id/status', async (req, res, next) => {
     const booking = await Booking.findByIdAndUpdate(
       req.params.id, 
       { status }, 
-      { new: true }
+      { returnDocument: 'after' }
     );
     if (!booking) return res.status(404).json({ error: 'Booking not found' });
     res.json(booking);

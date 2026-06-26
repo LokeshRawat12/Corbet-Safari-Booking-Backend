@@ -34,9 +34,40 @@ router.put('/zones/:slug', async (req, res, next) => {
     const zone = await Zone.findOneAndUpdate(
       { slug: req.params.slug },
       req.body,
-      { new: true, upsert: true }
+      { returnDocument: 'after', upsert: true }
     )
     res.json(zone)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// Create zone
+router.post('/zones', async (req, res, next) => {
+  try {
+    const zone = await Zone.create(req.body)
+    res.status(201).json(zone)
+  } catch (error) {
+    next(error)
+  }
+})
+
+// Bulk seed zones (upserts all provided zones)
+router.post('/zones/seed', async (req, res, next) => {
+  try {
+    const { zones } = req.body
+    if (!Array.isArray(zones)) return res.status(400).json({ error: 'zones array required' })
+
+    const results = []
+    for (const z of zones) {
+      const zone = await Zone.findOneAndUpdate(
+        { slug: z.slug },
+        z,
+        { returnDocument: 'after', upsert: true, setDefaultsOnInsert: true }
+      )
+      results.push(zone)
+    }
+    res.json(results)
   } catch (error) {
     next(error)
   }

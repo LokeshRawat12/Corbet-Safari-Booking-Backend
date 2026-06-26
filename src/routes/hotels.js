@@ -38,7 +38,7 @@ router.post('/hotels', async (req, res, next) => {
 // Update hotel
 router.put('/hotels/:id', async (req, res, next) => {
   try {
-    const hotel = await Hotel.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const hotel = await Hotel.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' })
     if (!hotel) return res.status(404).json({ error: 'Hotel not found' })
     res.json(hotel)
   } catch (error) {

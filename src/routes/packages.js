@@ -38,7 +38,7 @@ router.post('/packages', async (req, res, next) => {
 // Update package
 router.put('/packages/:id', async (req, res, next) => {
   try {
-    const pkg = await Package.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    const pkg = await Package.findByIdAndUpdate(req.params.id, req.body, { returnDocument: 'after' })
     if (!pkg) return res.status(404).json({ error: 'Package not found' })
     res.json(pkg)
   } catch (error) {

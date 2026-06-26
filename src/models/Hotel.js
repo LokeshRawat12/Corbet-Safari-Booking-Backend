@@ -14,6 +14,7 @@ const hotelSchema = new mongoose.Schema({
   facilities: [{ type: String }],
   policies: [{ type: String }],
   mapUrl: { type: String },
+  mapImage: { type: String },
   rooms: [{
     type: { type: String, required: true },
     image: { type: String },

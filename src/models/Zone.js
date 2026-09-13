@@ -23,6 +23,10 @@ const zoneSchema = new mongoose.Schema({
   }]
 }, { timestamps: true });
 
+zoneSchema.index({ title: 1 });
+zoneSchema.index({ isOpen: 1 });
+zoneSchema.index({ slug: 1, isOpen: 1 });
+
 const Zone = mongoose.model('Zone', zoneSchema);
 
 export default Zone;

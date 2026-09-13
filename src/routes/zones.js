@@ -2,11 +2,35 @@ import { Router } from 'express'
 import Zone from '../models/Zone.js'
 
 const router = Router()
+const zoneCache = new Map()
+const ZONE_CACHE_TTL = 60 * 1000
+
+function getCachedZones() {
+  const cached = zoneCache.get('all-zones')
+  if (cached && Date.now() - cached.time < ZONE_CACHE_TTL) {
+    return cached.data
+  }
+  return null
+}
+
+function setCachedZones(data) {
+  zoneCache.set('all-zones', { data, time: Date.now() })
+}
+
+function clearZoneCache() {
+  zoneCache.clear()
+}
 
 // Get all zones
 router.get('/zones', async (req, res, next) => {
   try {
-    const zones = await Zone.find().sort({ title: 1 })
+    const cached = getCachedZones()
+    if (cached) {
+      return res.json(cached)
+    }
+
+    const zones = await Zone.find({}).sort({ title: 1 }).lean()
+    setCachedZones(zones)
     res.json(zones)
   } catch (error) {
     next(error)
@@ -16,7 +40,7 @@ router.get('/zones', async (req, res, next) => {
 // Get single zone by slug
 router.get('/zones/:slug', async (req, res, next) => {
   try {
-    const zone = await Zone.findOne({ slug: req.params.slug })
+    const zone = await Zone.findOne({ slug: req.params.slug }).lean()
 
     if (!zone) {
       return res.status(404).json({ error: 'Zone not found' })
@@ -36,6 +60,7 @@ router.put('/zones/:slug', async (req, res, next) => {
       req.body,
       { returnDocument: 'after', upsert: true }
     )
+    clearZoneCache()
     res.json(zone)
   } catch (error) {
     next(error)
@@ -46,6 +71,7 @@ router.put('/zones/:slug', async (req, res, next) => {
 router.post('/zones', async (req, res, next) => {
   try {
     const zone = await Zone.create(req.body)
+    clearZoneCache()
     res.status(201).json(zone)
   } catch (error) {
     next(error)
@@ -67,6 +93,7 @@ router.post('/zones/seed', async (req, res, next) => {
       )
       results.push(zone)
     }
+    clearZoneCache()
     res.json(results)
   } catch (error) {
     next(error)
@@ -78,6 +105,7 @@ router.delete('/zones/:slug', async (req, res, next) => {
   try {
     const zone = await Zone.findOneAndDelete({ slug: req.params.slug })
     if (!zone) return res.status(404).json({ error: 'Zone not found' })
+    clearZoneCache()
     res.json({ message: 'Zone deleted' })
   } catch (error) {
     next(error)

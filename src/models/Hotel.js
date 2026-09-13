@@ -33,6 +33,11 @@ const hotelSchema = new mongoose.Schema({
 }, { timestamps: true });
 
 
+hotelSchema.index({ name: 1 });
+hotelSchema.index({ location: 1, isActive: 1 });
+hotelSchema.index({ category: 1, isActive: 1 });
+hotelSchema.index({ price: 1 });
+
 const Hotel = mongoose.model('Hotel', hotelSchema);
 
 export default Hotel;

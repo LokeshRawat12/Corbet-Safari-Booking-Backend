@@ -12,7 +12,7 @@ const zones = [
     subtitle: 'The Heart of the Wild Kingdom',
     description:
       'Dhikala is famous for its vast Patli Dun Valley. It is the only zone where you can witness massive elephant herds crossing the river against a backdrop of ancient Sal forests.',
-    image: '/images/Dhikala.jpg',
+    image: '/images/Dhikala.webp',
     highlights: ['Core Tiger Conservation Area', 'Best birding destination', 'Riverine ecosystem'],
     wildlife: [
       {
@@ -33,7 +33,7 @@ const zones = [
     subtitle: 'Grasslands & Tiger Tracks',
     description:
       'Bijrani is known for its biodiversity and open grasslands. It is one of the most visited zones for tiger sightings and birding.',
-    image: '/images/tiger2.jpg',
+    image: '/images/tiger2.webp',
     highlights: [
       'High tiger sighting probability',
       'Open grassland habitats',
@@ -69,7 +69,7 @@ const zones = [
       {
         name: 'Birdlife',
         description: 'A wide variety of resident and migratory birds.',
-        image: '/images/Bird-2.jpg',
+        image: '/images/Bird-2.webp',
       },
     ],
   },
@@ -79,13 +79,13 @@ const zones = [
     subtitle: 'Mixed Forests & Quiet Trails',
     description:
       'Dhela is a newer zone known for mixed forest types and rich biodiversity. It offers peaceful driving trails with a good chance of seeing leopards and deer.',
-    image: '/images/Dhela Zone.jpg',
+    image: '/images/Dhela Zone.webp',
     highlights: ['All-year access', 'Hotspot for bird watching', 'Quiet and less crowded'],
     wildlife: [
       {
         name: 'Leopard',
         description: 'Elusive big cats often spotted in the early hours.',
-        image: '/images/Elephant.jpg',
+        image: '/images/Elephant.webp',
       },
       {
         name: 'Indian Roller',
@@ -111,7 +111,7 @@ const zones = [
       {
         name: 'Grey Langur',
         description: 'Commonly seen moving through the treetops.',
-        image: '/images/Elephant.jpg',
+        image: '/images/Elephant.webp',
       },
     ],
   },
@@ -127,12 +127,12 @@ const zones = [
       {
         name: 'River Otter',
         description: 'A rare sight along the river banks.',
-        image: '/images/Elephent-2.jpg',
+        image: '/images/Elephent-2.webp',
       },
       {
         name: 'Kingfisher',
         description: 'Often seen hovering along the water.',
-        image: '/images/Elephant.jpg',
+        image: '/images/Elephant.webp',
       },
     ],
   },
@@ -148,7 +148,7 @@ const zones = [
       {
         name: 'Indian Bison',
         description: 'Grazes in the open grasslands.',
-        image: '/images/Elephent-2.jpg',
+        image: '/images/Elephent-2.webp',
       },
       {
         name: 'Peacock',
@@ -169,12 +169,12 @@ const zones = [
       {
         name: 'Wild Boar',
         description: 'Frequently seen crossing the tracks.',
-        image: '/images/Elephant.jpg',
+        image: '/images/Elephant.webp',
       },
       {
         name: 'Painted Stork',
         description: 'Often found near water bodies.',
-        image: '/images/Bird-2.jpg',
+        image: '/images/Bird-2.webp',
       },
     ],
   },
@@ -190,12 +190,12 @@ const zones = [
       {
         name: 'Sambar Deer',
         description: 'Commonly seen grazing near water.',
-        image: '/images/Elephant.jpg',
+        image: '/images/Elephant.webp',
       },
       {
         name: 'Water Monitor Lizard',
         description: 'Often seen near swampy areas.',
-        image: '/images/Elephent-2.jpg',
+        image: '/images/Elephent-2.webp',
       },
     ],
   },

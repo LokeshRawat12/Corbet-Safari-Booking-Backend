@@ -22,11 +22,19 @@ const transporter = nodemailer.createTransport({
   },
 })
 
+function maskIdentityProof(booking) {
+  const data = booking.toObject ? booking.toObject() : booking;
+  if (data.identityProofNumber) {
+    data.identityProofNumber = `****${data.identityProofNumber.slice(-4)}`;
+  }
+  return data;
+}
+
 // Get all bookings
 router.get('/bookings', async (req, res, next) => {
   try {
     const bookings = await Booking.find().sort({ submittedAt: -1 })
-    res.json(bookings)
+    res.json(bookings.map(maskIdentityProof))
   } catch (error) {
     next(error)
   }
@@ -39,7 +47,7 @@ router.get('/bookings/:id', async (req, res, next) => {
     if (!booking) {
       return res.status(404).json({ error: 'Booking not found' })
     }
-    res.json(booking)
+    res.json(maskIdentityProof(booking))
   } catch (error) {
     next(error)
   }

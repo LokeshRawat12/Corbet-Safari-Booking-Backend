@@ -5,6 +5,8 @@ const bookingSchema = new mongoose.Schema({
   email: { type: String, required: true },
   phone: { type: String, required: true },
   country: { type: String, default: 'India' },
+  identityProofType: String,
+  identityProofNumber: String,
   date: { type: String, required: true },
   adults: { type: Number, default: 1 },
   children: { type: Number, default: 0 },
